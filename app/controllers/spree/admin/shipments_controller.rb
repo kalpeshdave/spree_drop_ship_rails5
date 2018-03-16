@@ -22,10 +22,11 @@ module Spree
           params[:q][:created_at_lt] = Time.zone.parse(params[:q][:created_at_lt]).end_of_day rescue ""
         end
 
-        @search = Spree::Shipment.accessible_by(current_ability, :index).ransack(params[:q])
-        @shipments = @search.result.
-          page(params[:page]).
-          per(params[:per_page] || Spree::Config[:orders_per_page])
+        @collection = Spree::Shipment.accessible_by(current_ability, :index)
+        @search = @collection.ransack(params[:q])
+
+        per_page = params[:per_page] || Spree::Config[:admin_orders_per_page]
+        @shipments = @search.result.page(params[:page]).per(per_page)
 
         # Restore dates
         params[:q][:created_at_gt] = created_at_gt

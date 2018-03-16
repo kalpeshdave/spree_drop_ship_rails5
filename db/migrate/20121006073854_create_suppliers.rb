@@ -1,4 +1,4 @@
-class CreateSuppliers < ActiveRecord::Migration
+class CreateSuppliers < ActiveRecord::Migration[5.1]
 
   def change
     create_table :spree_suppliers do |t|
@@ -12,7 +12,6 @@ class CreateSuppliers < ActiveRecord::Migration
       t.datetime   :deleted_at
       t.timestamps
     end
-    add_index :spree_suppliers, :address_id
     add_index :spree_suppliers, :deleted_at
     add_index :spree_suppliers, :active
   end

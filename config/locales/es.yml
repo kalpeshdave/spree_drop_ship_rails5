@@ -17,13 +17,14 @@ es:
         active: Activo
         url: URL
         zipcode: Código Postal(ZipCode)
+        supplier: Proveedor
         supplier_info: Información de proveedor
         supplier_signup: Registro de proveedor
         suppliers: Proveedores
       spree/shipment:
         created_at: Creado
         number: Número
-        state: Estatus
+        state: Estado
         item_cost: Costo ítem
         cost: Costo
         total_tax: Total impuesto
@@ -44,12 +45,18 @@ es:
   signup_to_become_a_supplier: 'Autentíquese para ser un Proveedor'
   spree:
     admin:
+      drop_ship_orders:
+        deliver:
+          error: "La orden %{number} no pudo ser enviada al proveedor."
+          success: "La orden %{number} fue enviada al proveedor."
+        orders_sent: Todas las ordenes fueron enviadas a los proveedores
+        orders_not_sent: Algunas o todas las ordenes no pudieron ser enviadas. Por favor contacte directamente al proveedor.
       drop_ship_settings:
         update:
           success: Configuración Drop ship actualizada correctamente
       orders:
         drop_ship_order_order_header:
-          drop_ship_order_ids: DSO IDs
+          drop_ship_order_ids: Orden-envío IDs
         edit:
           approve_drop_ship_orders: Ordenes aprobadas por el proveedor
           resend_drop_ship_orders: Reenviar ordenes al proveedor
@@ -66,12 +73,10 @@ es:
         form:
           supplier_details: Detalles del Proveedor
           supplier_address: Dirección del Proveedor
-      drop_ship_orders:
-        deliver:
-          error: "La orden %{number} no pudo ser enviada al proveedor."
-          success: "La orden %{number} fue enviada al proveedor."
-        orders_sent: Todas las ordenes fueron enviadas a los proveedores
-        orders_not_sent: Algunas o todas las ordenes no pudieron ser enviadas. Por favor contacte directamente al proveedor.
+      tab:
+        suppliers: Proveedores
+        shipments: Envíos
+    automatically_deliver_orders_to_supplier: Enviar orden automaticamente a los proveedores        
     back_to_orders_list: Regresar a las ordenes
     back_to_suppliers: Regresar a los proveedores
     business: Negocio
@@ -79,19 +84,23 @@ es:
     company_info: Informacion de la compañia
     confirm_order: Confirmar Orden
     contact_address: Dirección de contacto
+    default_commission_flat_rate: Tarifa plana
+    default_commission_percentage: Porcentaje de comision
     drop_ship: Drop Ship
-    editing_supplier: Editar proveedor
-    default_commission_flat_rate: Comision por defecto
-    default_commission_percentage: Porcentaje de comision por defecto
-    automatically_deliver_orders_to_supplier: Enviar orden automaticamente a los proveedores
-    send_supplier_email: Enviar correo al proveedor
+    drop_ship_order_mailer:
+      supplier_order:
+        hello: "Hola %{name},"
+        subject: "%{name} Orden al proveedor #%{number}"
+        thank_you_again: "Gracias nuevamente por su negocio, <b>%{name}</b>"    
+    drop_ship_settings: Configuración de envíos    
+    editing_supplier: Editar proveedor    
     individual: Individual
+    listing_shipments: 'Lista de envíos'    
     listing_suppliers: Lista de proveedores
     manage: Gestionar
     name: Nombre
-    or: ó
-    suppliers: Proveedores
-    listing_shipments: 'Lista de envíos'
+    new_supplier: Nuevo proveedor
+    or: o
     order_state:
       active: Activo
       completed: Completado
@@ -101,18 +110,20 @@ es:
     save: Guardar
     search: Buscar
     send_order_to_supplier: Enviar orden al proveedor.
+    send_supplier_email: Enviar correo al proveedor    
     show_only_incomplete_orders: Solo mostrar ordenes incompletas
     supplier: Proveedor
+    supplier_details: Información del Proveedor
     supplier_information: Información del proveedor
-    drop_ship_order_mailer:
-      supplier_order:
-        hello: "Hola %{name},"
-        subject: "%{name} Orden al proveedor #%{number}"
-        thank_you_again: "Gracias nuevamente por su negocio, <b>%{name}</b>"
+    suppliers: Proveedores    
     shared:
       unauthorized:
         explained: Usted no está autorizado a acceder a esta página.
         unauthorized: No autorizado
+    shipment_state:
+      delivered: Entregado
+      pending: Pendiente
+      shipped: Enviado      
     supplier_mailer:
       welcome:
         hello: "Hola %{name},"

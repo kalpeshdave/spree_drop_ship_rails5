@@ -8,6 +8,8 @@ describe Spree::Order do
       SpreeDropShip::Config[:send_supplier_email] = true
     end
 
+    prepend DropShipFinalize
+
     it 'should deliver drop ship orders when Spree::DropShipConfig[:send_supplier_email] == true' do
       order = create(:order_with_totals, ship_address: create(:address))
       order.line_items = [create(:line_item, variant: create(:variant_with_supplier)), create(:line_item, variant: create(:variant_with_supplier))]
