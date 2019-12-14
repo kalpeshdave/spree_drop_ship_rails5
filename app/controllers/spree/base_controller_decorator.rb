@@ -1,6 +1,8 @@
-Spree::BaseController.class_eval do
+module Spree::BaseControllerDecorator
 
-  prepend_before_action :redirect_supplier
+  def self.prepended(base)
+    base.prepend_before_action :redirect_supplier
+  end
 
   private
 
@@ -11,3 +13,5 @@ Spree::BaseController.class_eval do
   end
 
 end
+
+Spree::BaseController.prepend Spree::BaseControllerDecorator

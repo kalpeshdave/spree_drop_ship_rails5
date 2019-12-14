@@ -1,6 +1,8 @@
-Spree::Product.class_eval do
+module Spree::ProductDecorator
 
-  has_many :suppliers, through: :master
+  def self.prepended(base)
+    base.has_many :suppliers, through: :master
+  end
 
   def add_supplier!(supplier_or_id)
     supplier = supplier_or_id.is_a?(Spree::Supplier) ? supplier_or_id : Spree::Supplier.find(supplier_or_id)
@@ -30,3 +32,5 @@ Spree::Product.class_eval do
   end
 
 end
+
+Spree::Product.prepend Spree::ProductDecorator

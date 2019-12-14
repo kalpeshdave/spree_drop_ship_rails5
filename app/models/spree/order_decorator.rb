@@ -1,8 +1,10 @@
 module DropShipFinalize
-  Spree::Order.class_eval do
+  module Spree::OrderDecorator
 
-    has_many :stock_locations, through: :shipments
-    has_many :suppliers, through: :stock_locations
+    def self.prepended(base)
+      base.has_many :stock_locations, through: :shipments
+      base.has_many :suppliers, through: :stock_locations
+    end
 
     # Once order is finalized we want to notify the suppliers of their drop ship orders.
     # Here we are handling notification by emailing the suppliers.
@@ -25,5 +27,6 @@ module DropShipFinalize
     end
     # alias_method_chain :finalize!, :drop_ship
 
+    Spree::Order.prepend Spree::OrderDecorator
   end
 end

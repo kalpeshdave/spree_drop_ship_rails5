@@ -1,7 +1,9 @@
-Spree::Admin::ProductsController.class_eval do
+module Spree::Admin::ProductsControllerDecorator
 
-  before_action :get_suppliers, only: [:edit, :update]
-  before_action :supplier_collection, only: [:index]
+  def self.prepended(base)
+    base.before_action :get_suppliers, only: [:edit, :update]
+    base.before_action :supplier_collection, only: [:index]
+  end
 
   private
 
@@ -17,3 +19,5 @@ Spree::Admin::ProductsController.class_eval do
   end
 
 end
+
+Spree::Admin::ProductsController.prepend Spree::Admin::ProductsControllerDecorator

@@ -1,7 +1,9 @@
-Spree::Api::V1::StockLocationsController.class_eval do
+module Spree::Api::V1::StockLocationsControllerDecorator
 
-  before_action :supplier_locations, only: [:index]
-  before_action :supplier_transfers, only: [:index]
+  def self.prepended(base)
+    base.before_action :supplier_locations, only: [:index]
+    base.before_action :supplier_transfers, only: [:index]
+  end
 
   private
 
@@ -16,3 +18,5 @@ Spree::Api::V1::StockLocationsController.class_eval do
   end
 
 end
+
+Spree::Api::V1::StockLocationsController.prepend Spree::Api::V1::StockLocationsControllerDecorator

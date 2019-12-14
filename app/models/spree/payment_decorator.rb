@@ -1,7 +1,9 @@
-module Spree
-  Payment.class_eval do
+module Spree::PaymentDecorator
 
-    belongs_to :payable, polymorphic: true
-
+  def self.prepended(base)
+    base.belongs_to :payable, polymorphic: true
   end
+
 end
+
+Spree::Payment.prepend Spree::PaymentDecorator

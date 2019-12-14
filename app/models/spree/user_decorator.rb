@@ -1,11 +1,15 @@
-Spree.user_class.class_eval do
+module Spree::UserDecorator
 
-  belongs_to :supplier, class_name: 'Spree::Supplier'
+  def self.prepended(base)
+    base.belongs_to :supplier, class_name: Spree::Supplier.to_s
 
-  has_many :variants, through: :supplier
+    base.has_many :variants, through: :supplier
+  end
 
   def supplier?
     supplier.present?
   end
 
 end
+
+Spree::User.prepend Spree::UserDecorator

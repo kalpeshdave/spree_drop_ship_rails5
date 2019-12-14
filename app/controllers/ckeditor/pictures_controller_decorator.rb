@@ -1,17 +1,24 @@
-if defined?(Ckeditor::PicturesController)
-  Ckeditor::PicturesController.class_eval do
-    load_and_authorize_resource :class => 'Ckeditor::Picture'
-    after_filter :set_supplier, only: [:create]
+module Ckeditor::PicturesControllerDecorator
 
-    def index
-    end
+  def self.prepended(base)
+    base.load_and_authorize_resource class: Ckeditor::Picture.to_s
+    base.after_action :set_supplier, only: [:create]
+  end
 
-    private
-    def set_supplier
-      if spree_current_user.supplier? and @picture
-        @picture.supplier = spree_current_user.supplier
-        @picture.save
-      end
+  def index
+  end
+
+  private
+
+  def set_supplier
+    if spree_current_user.supplier? and @picture
+      @picture.supplier = spree_current_user.supplier
+      @picture.save
     end
   end
+
+end
+
+if defined?(Ckeditor::PicturesController)
+  Ckeditor::PicturesController.prepend Ckeditor::PicturesControllerDecorator
 end

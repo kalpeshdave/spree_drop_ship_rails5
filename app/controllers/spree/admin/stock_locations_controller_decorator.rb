@@ -1,6 +1,8 @@
-Spree::Admin::StockLocationsController.class_eval do
+module Spree::Admin::StockLocationsControllerDecorator
 
-  create.after :set_supplier
+  def self.prepended(base)
+    base.after_action :set_supplier, only: [:create]
+  end
 
   private
 
@@ -12,3 +14,5 @@ Spree::Admin::StockLocationsController.class_eval do
   end
 
 end
+
+Spree::Admin::StockLocationsController.prepend Spree::Admin::StockLocationsControllerDecorator
