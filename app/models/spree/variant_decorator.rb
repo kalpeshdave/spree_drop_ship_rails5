@@ -14,7 +14,7 @@ module Spree::VariantDecorator
   end
 
   def create_stock_items
-    StockLocation.all.each do |stock_location|
+    Spree::StockLocation.all.each do |stock_location|
       if stock_location.supplier_id.blank? || self.suppliers.pluck(:id).include?(stock_location.supplier_id)
         stock_location.propagate_variant(self) if stock_location.propagate_all_variants?
       end
